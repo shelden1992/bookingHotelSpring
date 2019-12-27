@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%--<%@taglib uri="http://www.springframework.org/tags" prefix="form"%>--%>
 
 <c:set var="form" value="${sessionScope.form}"/>
 <c:set var="reservation" value="${form.reservation}"/>
@@ -51,65 +51,75 @@
         <div class="row check-availabilty" id="next">
             <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
 
-                <form:form action="check-availabilty" method="post">
-                    <div class="row">
-                        <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                            <label for="checkin_date" name="checkin_date"
-                                   class="font-weight-bold text-black"><spring:message code="navigation.bookingForm.dataCheckIn"/> </label>
-                            <div class="field-icon-wrap">
-                                <div class="icon"><span class="icon-calendar"></span></div>
-                                <form:input type="text" id="checkin_date" path="checkinDate" class="form-control"/>
-                            </div>
+                < form action="check-availabilty" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+                        <label for="checkin_date" name="checkin_date"
+                               class="font-weight-bold text-black"><spring:message
+                                code="navigation.bookingForm.dataCheckIn"/> </label>
+                        <div class="field-icon-wrap">
+                            <div class="icon"><span class="icon-calendar"></span></div>
+                            <input type="text" id="checkin_date" path="checkinDate" class="form-control"/>
                         </div>
-                        <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                            <label for="checkout_date" class="font-weight-bold text-black"><spring:message code="navigation.bookingForm.dataCheckOut"/> </label>
-                            <div class="field-icon-wrap">
-                                <div class="icon"><span class="icon-calendar"></span></div>
-                                <form:input type="text" id="checkout_date" path="checkoutDate" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
-                            <div class="row">
-                                <div class="col-md-6 mb-3 mb-md-0">
-                                    <label for="adults" class="font-weight-bold text-black"><spring:message code="navigation.bookingForm.adults"/></label>
-                                    <div class="field-icon-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <form:select path="adults" id="adults" class="form-control">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4+</option>
-                                        </form:select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label for="roomType" class="font-weight-bold text-black"><spring:message code="navigation.bookingForm.roomType"/></label>
-                                    <div class="field-icon-wrap" onclick="">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <form:select path="roomType" id="roomType" class="form-control">
-                                            <option value="ALL" name="ALL"><spring:message code="selectionRooms.header.all"/></option>
-                                            <option value="COMFORT"><spring:message code="selectionRooms.header.roomTypeComfort"/></option>
-                                            <option value="FAMILY REST" name="FAMILY REST"><spring:message code="selectionRooms.header.roomTypeFamilyRest"/></option>
-                                            <option value="RELAX"><spring:message code="selectionRooms.header.roomTypeRelax"/></option>
-                                            <option value="BUSINESS"><spring:message code="selectionRooms.header.roomTypeBusiness"/></option>
-                                            <option value="LUX"><spring:message code="selectionRooms.header.roomTypeLux"/></option>
-
-                                        </form:select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-3 align-self-center">
-                            <button class="btn btn-primary btn-block text-white"><fmt:message
-                                    key="navigation.bookingForm.checkAvailabilty"/></button>
-                        </div>
-                        <c:if test="${existFreeRooms!=null}">
-                            <a style="color: red;font-size: large;"> <fmt:message
-                                    key="${existFreeRooms}"/></a>
-                        </c:if>
                     </div>
-                </form:form>
+                    <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
+                        <label for="checkout_date" class="font-weight-bold text-black"><spring:message
+                                code="navigation.bookingForm.dataCheckOut"/> </label>
+                        <div class="field-icon-wrap">
+                            <div class="icon"><span class="icon-calendar"></span></div>
+                            <input type="text" id="checkout_date" path="checkoutDate" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
+                        <div class="row">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="adults" class="font-weight-bold text-black"><spring:message
+                                        code="navigation.bookingForm.adults"/></label>
+                                <div class="field-icon-wrap">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <form:select path="adults" id="adults" class="form-control">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4+</option>
+                                    </form:select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="roomType" class="font-weight-bold text-black"><spring:message
+                                        code="navigation.bookingForm.roomType"/></label>
+                                <div class="field-icon-wrap" onclick="">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <form:select path="roomType" id="roomType" class="form-control">
+                                        <option value="ALL" name="ALL"><spring:message
+                                                code="selectionRooms.header.all"/></option>
+                                        <option value="COMFORT"><spring:message
+                                                code="selectionRooms.header.roomTypeComfort"/></option>
+                                        <option value="FAMILY REST" name="FAMILY REST"><spring:message
+                                                code="selectionRooms.header.roomTypeFamilyRest"/></option>
+                                        <option value="RELAX"><spring:message
+                                                code="selectionRooms.header.roomTypeRelax"/></option>
+                                        <option value="BUSINESS"><spring:message
+                                                code="selectionRooms.header.roomTypeBusiness"/></option>
+                                        <option value="LUX"><spring:message
+                                                code="selectionRooms.header.roomTypeLux"/></option>
+
+                                    </form:select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 align-self-center">
+                        <button class="btn btn-primary btn-block text-white"><fmt:message
+                                key="navigation.bookingForm.checkAvailabilty"/></button>
+                    </div>
+                    <c:if test="${existFreeRooms!=null}">
+                        <a style="color: red;font-size: large;"> <fmt:message
+                                key="${existFreeRooms}"/></a>
+                    </c:if>
+                </div>
+                </form>
             </div>
         </div>
     </div>

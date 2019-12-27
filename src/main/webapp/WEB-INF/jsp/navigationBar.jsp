@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
 
 <c:set var="form" value="${sessionScope.form}"/>
 <c:set var="user" value="${form.user}"/>
@@ -47,31 +47,12 @@
                 </li>
 
 
-                <a <%--href="${pageContext.request.contextPath}/language?locale=en"--%> class="text-uppercase">
-    <span class="text-danger">
-    <c:if test="${user!= null}">
-        <c:out value="${user.name}"/>
-
-     </span>
-                </a>
-
                 <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
-                    <a class="nav-link" href="logOut">
-                        <span class="pb_rounded-4 px-3 rounded"><spring:message
-                                code="navigation.registerForm.signOut"/></span></a>
-
-                </li>
-
-                </c:if>
-
-                <c:if test="${user== null}">
-                    <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
-                        <a class="nav-link" href="login">
+                    <a class="nav-link" href="login-form">
                             <span class="pb_rounded-4 px-3 rounded"><spring:message
                                     code="navigation.registerForm.signIn"/></span></a>
 
-                    </li>
-                </c:if>
+                </li>
 
 
             </ul>
@@ -94,7 +75,7 @@
                 <div class="row">
                     <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
 
-                        <form:form action="check-availabilty" method="post"
+                        <form action="check-availabilty" method="post"
                               class="bg-white p-4">
                             <div class="row mb-4">
                                 <div class="col-12"><h2><spring:message code="navigation.bookingForm.booking"/></h2>
@@ -106,12 +87,12 @@
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="checkin_date"><spring:message
                                             code="navigation.bookingForm.dataCheckIn"/></label>
-                                    <input type="text" id="checkin_date" path="checkin-date" class="form-control">
+                                    <input type="text" id="checkin_date" name="checkin-date" class="form-control">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="checkout_date"><spring:message
                                             code="navigation.bookingForm.dataCheckOut"/></label>
-                                    <input type="text" id="checkout_date" path="checkout-date" class="form-control">
+                                    <input type="text" id="checkout_date" name="checkout-date" class="form-control">
                                 </div>
                             </div>
 
@@ -160,7 +141,7 @@
                                            class="btn btn-primary text-white py-3 px-5 font-weight-bold">
                                 </div>
                             </div>
-                        </form:form>
+                        </form>
 
                     </div>
 

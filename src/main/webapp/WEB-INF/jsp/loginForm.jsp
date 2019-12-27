@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="statusLoginMessage" value="${requestScope.statusLoginMessage}"/>
 
 <html>
@@ -22,7 +23,6 @@
         </div>
 
         <div class="collapse navbar-collapse" id="templateux-navbar-nav">
-
 
 
             <div class="col-lg-6 col-sm-6 col-8 header-top-left">
@@ -47,60 +47,59 @@
                             <div class="row">
                                 <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
 
-                                    <form action="login" method="post"
-                                          class="bg-white p-4">
+                                    <%--                                    @elvariable id="loginForm" type="org.courses.controller.LoginController"--%>
+                                    <form:form action="process-login-form" method="post"
+                                               class="bg-white p-4" modelAttribute="loginForm">
                                         <div class="row mb-4">
-                                            <div class="col-12"><h2><spring:message code="navigation.registerForm.signIn"/></h2>
-                                                <c:if test="${statusLoginMessage!=null}">
-                                                    <h5><span class="text-danger">
-                                                    <fmt:message
-                                                            key="${statusLoginMessage}"/></span></h5>
-                                                </c:if>
+                                            <div class="col-12"><h2><spring:message
+                                                    code="navigation.registerForm.signIn"/></h2>
 
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 form-group">
-                                                <label class="text-black font-weight-bold" for="nameLogin"><spring:message code="navigation.registerForm.name"/></label>
-                                                <input type="text" id="nameLogin" class="form-control " name="name"
-                                                       required="required">
+                                            <div class="col-md-12 form-group">
+
+                                                <label class="text-black font-weight-bold"
+                                                       for="name"><spring:message
+                                                        code="navigation.registerForm.name"/></label>
+                                                <form:input type="text" id="name" class="form-control" path="name"
+                                                            required="required"/>
+                                                <form:errors path="name" cssClass="text-danger"/>
                                             </div>
 
-                                            <div class="col-md-6 form-group">
-                                                <label class="text-black font-weight-bold"
-                                                       for="surnameLogin"><spring:message code="navigation.registerForm.surname"/></label>
-                                                <input type="text" id="surnameLogin" class="form-control "
-                                                       name="surname" required="required">
-                                            </div>
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold" for="email">Email</label>
-                                                <input type="email" id="email" class="form-control " name="email"
-                                                       required="required">
+                                                <form:input type="email" id="email" class="form-control " path="email"
+                                                            required="required"/>
+                                                <form:errors path="email" cssClass="text-danger"/>
                                             </div>
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold"
-                                                       for="passwordLogin"><spring:message code="navigation.registerForm.password"/></label>
-                                                <input type="password" id="passwordLogin" class="form-control "
-                                                       name="password" pattern=".{6,}" title="Six or more characters"
-                                                       required="required">
+                                                       for="password"><spring:message
+                                                        code="navigation.registerForm.password"/></label>
+                                                <form:input type="password" id="password" class="form-control "
+                                                            path="password" pattern=".{6,}"
+                                                            title="Six or more characters"
+                                                            required="required"/>
+                                                <form:errors path="password" cssClass="text-danger"/>
                                             </div>
-
                                             <div class="row">
                                                 <div class="d-flex justify-content-between align-content-end w-100 col-auto">
                                                     <div class="text-left">
-
-                                                        <p><spring:message code="navigation.registerForm.haveNotAccount"/></p>
+                                                        <p><spring:message
+                                                                code="navigation.registerForm.haveNotAccount"/></p>
                                                         <a class="nav-link btn btn-primary"
-                                                           href="registration"><spring:message code="navigation.banner.register"/></a>
-
+                                                           href="registration-form"><spring:message
+                                                                code="navigation.banner.register"/></a>
                                                     </div>
-                                                    <input type="submit" value="<spring:message code="navigation.registerForm.signIn"/>"
+                                                    <input type="submit"
+                                                           value="<spring:message code="navigation.registerForm.signIn"/>"
                                                            style="right: auto; align-self: flex-end;"
                                                            class="btn btn-primary">
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </form:form>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="statusRegisterMessage" value="${requestScope.statusRegisterMessage}"/>
 <html>
 
@@ -42,65 +43,75 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
-                                    <form action="register" method="post"
-                                          class="bg-white p-4">
+                                    <form:form action="processing-registration-form" method="post"
+                                               class="bg-white p-4" modelAttribute="registrationFormAttribute">
                                         <div class="row mb-4">
                                             <div class="col-12"><h2><fmt:message
                                                     key="navigation.registerForm.register"/></h2>
-                                                <c:if test="${statusRegisterMessage!=null}">
-                                                    <h5><span class="text-danger"><fmt:message
-                                                            key="${statusRegisterMessage}"/></span></h5>
-                                                </c:if>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 form-group">
                                                 <label class="text-black font-weight-bold" for="name"><fmt:message
                                                         key="navigation.registerForm.name"/></label>
-                                                <input type="text" id="name" class="form-control " name="name"
-                                                       required="required">
+                                                <form:input type="text" id="name" class="form-control " path="name"
+                                                            required="required"/>
+                                                <form:errors path="name" cssClass="text-danger"/>
                                             </div>
 
                                             <div class="col-md-6 form-group">
                                                 <label class="text-black font-weight-bold" for="surname"><fmt:message
                                                         key="navigation.registerForm.surname"/></label>
-                                                <input type="text" id="surname" class="form-control " name="surname"
+                                                <form:input type="text" id="surname" class="form-control "
+                                                            path="surname"
+                                                            required="required"/>
+                                                <form:errors path="surname" cssClass="text-danger"/>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <label class="text-black font-weight-bold" for="email">Email</label>
+                                                <input type="email" id="email" class="form-control " name="email"
                                                        required="required">
                                             </div>
 
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold" for="phone"><fmt:message
                                                         key="navigation.registerForm.phone"/></label>
-                                                <input type="text" id="phone" class="form-control " name="phone"
-                                                       pattern="[\+]\d{2}\d{2}\d{4}\d{4}"
-                                                       title="Phone Number like: +380502087566" required="required">
+                                                <form:input type="text" id="phone" class="form-control " path="phone"
+                                                            pattern="[\+]\d{2}\d{2}\d{4}\d{4}"
+                                                            title="Phone Number like: +380502087566"
+                                                            required="required"/>
+                                                <form:errors path="phone" cssClass="text-danger"/>
                                             </div>
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold" for="password"><fmt:message
                                                         key="navigation.registerForm.password"/></label>
-                                                <input type="password" id="password" class="form-control "
-                                                       name="password" pattern=".{6,}" title="Six or more characters"
-                                                       required="required">
+                                                <form:input type="password" id="password" class="form-control "
+                                                            path="password" pattern=".{6,}"
+                                                            title="Six or more characters"
+                                                            required="required"/>
+                                                <form:errors path="password" cssClass="text-danger"/>
                                             </div>
-
-                                        </div>
-                                        <div class="row">
-
-
                                             <div class="col-md-12 form-group">
-                                                <label class="text-black font-weight-bold" for="email">Email</label>
-                                                <input type="email" id="email" class="form-control " name="email"
-                                                       required="required">
+                                                <label class="text-black font-weight-bold"
+                                                       for="passwordConfirm"><fmt:message
+                                                        key="navigation.registerForm.passwordConfirm"/></label>
+                                                <form:input type="password" id="passwordConfirm" class="form-control "
+                                                            path="passwordConfirm" pattern=".{6,}"
+                                                            title="Six or more characters"
+                                                            required="required"/>
+                                                <form:errors path="passwordConfirm" cssClass="text-danger"/>
                                             </div>
+
                                         </div>
+
                                         <div class="row mb-4">
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold"
-                                                       for="additionalInfo"><fmt:message
+                                                       for="notes"><fmt:message
                                                         key="navigation.bookingForm.notes"/></label>
-                                                <textarea name="additionalInfo" id="additionalInfo"
-                                                          class="form-control " cols="3"
-                                                          rows="3"></textarea>
+                                                <form:textarea path="notes" id="notes"
+                                                               class="form-control " cols="3"
+                                                               rows="3"/>
                                             </div>
                                         </div>
 
@@ -114,7 +125,7 @@
 
                                             </div>
                                         </div>
-                                    </form>
+                                    </form:form>
                                 </div>
                             </div>
                         </div>

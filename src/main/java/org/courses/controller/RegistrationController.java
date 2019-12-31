@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,15 +37,14 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration-form", method = RequestMethod.GET)
     public String getRegistrationFormPage(Model model) {
-        model.addAttribute("registrationFormAttribute", new RegistrationForm());
+        model.addAttribute("registrationForm", new RegistrationForm());
         LOG.debug("Added to attribute \"registrationForm\"");
 
         return "registrationForm";
     }
 
     @RequestMapping(value = "/processing-registration-form", method = RequestMethod.POST)
-    public String processingRegistrationForm(@Valid @ModelAttribute(name = "registrationFormAttribute") RegistrationForm registrationForm, BindingResult error, Model model) {
-
+    public String processingRegistrationForm(@Valid @ModelAttribute(name = "registrationForm") RegistrationForm registrationForm, BindingResult error, Model model) {
         if (error.hasErrors()) {
             return "registrationForm";
         }

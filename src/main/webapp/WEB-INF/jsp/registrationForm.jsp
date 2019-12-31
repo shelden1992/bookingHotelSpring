@@ -44,7 +44,7 @@
                             <div class="row">
                                 <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
                                     <form:form action="processing-registration-form" method="post"
-                                               class="bg-white p-4" modelAttribute="registrationFormAttribute">
+                                               class="bg-white p-4" modelAttribute="registrationForm">
                                         <div class="row mb-4">
                                             <div class="col-12"><h2><fmt:message
                                                     key="navigation.registerForm.register"/></h2>

@@ -2,7 +2,7 @@ package org.courses.dao;
 
 import org.apache.log4j.Logger;
 import org.courses.model.Form;
-import org.courses.model.Photo;
+//import org.courses.model.Photo;
 import org.springframework.data.repository.CrudRepository;
 
 import java.sql.ResultSet;

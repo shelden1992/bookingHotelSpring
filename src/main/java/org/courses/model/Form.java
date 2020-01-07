@@ -1,13 +1,15 @@
 package org.courses.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.StringJoiner;
 
-@javax.persistence.Entity
-public class Form extends Entity {
+@Entity
+public class Form extends BaseEntity {
     @NotNull
     @NotEmpty
     @OneToOne
@@ -15,6 +17,7 @@ public class Form extends Entity {
     @NotNull
     @NotEmpty
     @OneToOne
+    @JoinColumn(name = "reservation_id", referencedColumnName = "id")
     private Reservation reservation;
     @NotNull
     @NotEmpty

@@ -3,7 +3,7 @@ package org.courses.model;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class Entity {
+public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)

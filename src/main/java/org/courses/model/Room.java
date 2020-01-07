@@ -1,16 +1,13 @@
 package org.courses.model;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.StringJoiner;
 
-@javax.persistence.Entity
-public class Room extends Entity {
+@Entity
+public class Room extends BaseEntity {
 
     @NotNull
     @NotEmpty
@@ -22,11 +19,13 @@ public class Room extends Entity {
     private double price;
     @NotNull
     @NotEmpty
-    @Column(name = "room_type")
+    @Column(name = "type")
     @Enumerated(value = EnumType.STRING)
     private RoomType roomType;
-    @OneToMany
-    private List<Photo> photoList;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "room")
+    private List<Photo> photos;
 
     public Room(int place, RoomType roomType) {
         this.place = place;
@@ -38,16 +37,8 @@ public class Room extends Entity {
         this.place = place;
         this.price = price;
         this.roomType = roomType;
-        this.photoList = photoList;
     }
 
-    public List<Photo> getPhotoList() {
-        return photoList;
-    }
-
-    public void setPhotoList(List<Photo> photoList) {
-        this.photoList = photoList;
-    }
 
     public double getPrice() {
         return price;
@@ -83,6 +74,8 @@ public class Room extends Entity {
         this.id = id;
     }
 
+    public Room() {
+    }
 
     public int getPlace() {
         return place;

@@ -1,17 +1,20 @@
 package org.courses.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.StringJoiner;
 
-@javax.persistence.Entity
-public class Reservation extends Entity {
+@Entity
+public class Reservation extends BaseEntity {
     @NotNull
     @NotEmpty
     @OneToOne
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
     @NotNull
     @NotEmpty
@@ -21,9 +24,13 @@ public class Reservation extends Entity {
     @Column(name = "finish_reservation")
     @NotEmpty
     private Date finishReservation;
-    private long dateDiff;
 
-    public Reservation(Date startReservation, Date finishReservation) {
+    public Reservation() {
+    }
+
+    public Reservation(int id, Room room, Date startReservation, Date finishReservation) {
+        this.id = id;
+        this.room = room;
         this.startReservation = startReservation;
         this.finishReservation = finishReservation;
     }
@@ -34,24 +41,9 @@ public class Reservation extends Entity {
         this.finishReservation = finishReservation;
     }
 
-    public Reservation(int id, Room room, Date startReservation, Date finishReservation) {
-        this.id = id;
-        this.room = room;
+    public Reservation(Date startReservation, Date finishReservation) {
         this.startReservation = startReservation;
         this.finishReservation = finishReservation;
-    }
-
-    public Reservation(Room room, Date startReservation, Date finishReservation, long dateDiff) {
-        this.room = room;
-        this.startReservation = startReservation;
-        this.finishReservation = finishReservation;
-        this.dateDiff = dateDiff;
-    }
-
-    public Reservation(Date startReservation, Date finishReservation, long dateDiff) {
-        this.startReservation = startReservation;
-        this.finishReservation = finishReservation;
-        this.dateDiff = dateDiff;
     }
 
     public int getEntityId() {
@@ -68,14 +60,6 @@ public class Reservation extends Entity {
 
     public void setRoom(Room room) {
         this.room = room;
-    }
-
-    public long getDateDiff() {
-        return dateDiff;
-    }
-
-    public void setDateDiff(long dateDiff) {
-        this.dateDiff = dateDiff;
     }
 
     public Date getStartReservation() {

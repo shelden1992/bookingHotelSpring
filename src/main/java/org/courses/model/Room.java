@@ -23,8 +23,8 @@ public class Room extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private RoomType roomType;
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "room")
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "room_id")
     private List<Photo> photos;
 
     public Room(int place, RoomType roomType) {
@@ -39,6 +39,9 @@ public class Room extends BaseEntity {
         this.roomType = roomType;
     }
 
+
+    public Room() {
+    }
 
     public double getPrice() {
         return price;
@@ -72,9 +75,6 @@ public class Room extends BaseEntity {
 
     public void setEntityId(int id) {
         this.id = id;
-    }
-
-    public Room() {
     }
 
     public int getPlace() {

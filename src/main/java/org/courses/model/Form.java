@@ -1,9 +1,6 @@
 package org.courses.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.StringJoiner;
@@ -16,7 +13,7 @@ public class Form extends BaseEntity {
     private User user;
     @NotNull
     @NotEmpty
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "reservation_id", referencedColumnName = "id")
     private Reservation reservation;
     @NotNull

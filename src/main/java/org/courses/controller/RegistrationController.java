@@ -10,12 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -35,7 +34,7 @@ public class RegistrationController {
         dataBinder.setValidator(validator);
     }
 
-    @RequestMapping(value = "/registration-form", method = RequestMethod.GET)
+    @GetMapping(value = "/registration-form")
     public String getRegistrationFormPage(Model model) {
         model.addAttribute("registrationForm", new RegistrationForm());
         LOG.debug("Added to attribute \"registrationForm\"");
@@ -43,9 +42,10 @@ public class RegistrationController {
         return "registrationForm";
     }
 
-    @RequestMapping(value = "/processing-registration-form", method = RequestMethod.POST)
+    @PostMapping(value = "/processing-registration")
     public String processingRegistrationForm(@Valid @ModelAttribute(name = "registrationForm") RegistrationForm registrationForm, BindingResult error, Model model) {
         if (error.hasErrors()) {
+            LOG.debug("Error in registration form " + error.toString());
             return "registrationForm";
         }
         User user = userService.registerUser(registrationForm, UserRole.USER);

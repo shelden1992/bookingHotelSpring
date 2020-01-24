@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LogOutController {
-    @RequestMapping(value = "/logOut")
+    @RequestMapping(value = "/logout")
     private String logOut(HttpServletRequest request) {
         return  null;
     }

@@ -2,14 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<c:set var="form" value="${sessionScope.form}"/>
-<c:set var="user" value="${form.user}"/>
 
 <nav class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light" id="templateux-navbar">
     <div class="container">
-        <a class="navbar-brand" href="/booking-hotel/"><span class="text-danger">Booking</span>Hotel</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/"><span class="text-danger">Booking</span>Hotel</a>
         <div class="site-menu-toggle js-site-menu-toggle  ml-auto" data-aos="fade" data-toggle="collapse"
              data-target="#templateux-navbar-nav" aria-controls="templateux-navbar-nav" aria-expanded="false"
              aria-label="Toggle navigation">
@@ -20,19 +18,26 @@
 
         <div class="collapse navbar-collapse" id="templateux-navbar-nav">
             <ul class="navbar-nav ml-5">
-                <li class="nav-item"><a class="nav-link" href=/booking-hotel/> <spring:message
+                <security:authorize access="!isAuthenticated()">
+                    <li class="nav-item"><a class="nav-link" href=${pageContext.request.contextPath}/admin>
+                        <spring:message
+                                code="navigation.banner.admin"/> </a></li>
+                </security:authorize>
+                <li class="nav-item"><a class="nav-link" href=${pageContext.request.contextPath}/> <spring:message
                         code="navigation.banner.home"/> </a></li>
                 <li class="nav-item"><a class="nav-link"
-                                        href="selection-rooms"><spring:message code="navigation.banner.rooms"/></a>
+                                        href="${pageContext.request.contextPath}/selection-rooms"><spring:message
+                        code="navigation.banner.rooms"/></a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="event"><spring:message
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/event"><spring:message
                         code="navigation.banner.events"/></a></li>
 
-                <li class="nav-item"><a class="nav-link" href="team"><spring:message code="navigation.banner.team"/></a>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/team"><spring:message
+                        code="navigation.banner.team"/></a>
                 </li>
 
                 <li class="nav-item"><a class="nav-link"
-                                        href="/booking-hotel/#section-contact"><spring:message
+                                        href="${pageContext.request.contextPath}/#section-contact"><spring:message
                         code="navigation.banner.contact"/></a>
                 </li>
                 <li class="nav-item"><a class="nav-link"
@@ -42,17 +47,25 @@
                     <a class="nav-link" href="#"
                        data-toggle="modal"
                        data-target="#booking-form">
-                        <span class="pb_rounded-4 px-4 rounded"><spring:message
-                                code="navigation.bookingForm.booking"/></span></a>
+    <span class="pb_rounded-4 px-4 rounded"><spring:message
+            code="navigation.bookingForm.booking"/></span></a>
                 </li>
 
-
-                <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
-                    <a class="nav-link" href="login-form">
+                <security:authorize access="!isAuthenticated()">
+                    <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/login-form">
                             <span class="pb_rounded-4 px-3 rounded"><spring:message
                                     code="navigation.registerForm.signIn"/></span></a>
+                    </li>
+                </security:authorize>
 
-                </li>
+                <security:authorize access="isAuthenticated()">
+                    <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/logout">
+                            <span class="pb_rounded-4 px-3 rounded"><spring:message
+                                    code="navigation.registerForm.signOut"/></span></a>
+                    </li>
+                </security:authorize>
 
 
             </ul>
@@ -75,7 +88,7 @@
                 <div class="row">
                     <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
 
-                        <form action="check-availabilty" method="post"
+                        <form action="check-availability" method="post"
                               class="bg-white p-4">
                             <div class="row mb-4">
                                 <div class="col-12"><h2><spring:message code="navigation.bookingForm.booking"/></h2>

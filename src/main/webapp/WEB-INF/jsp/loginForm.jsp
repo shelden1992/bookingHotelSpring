@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<c:set var="statusLoginMessage" value="${requestScope.statusLoginMessage}"/>
+<%--<c:set var="statusLoginMessage" value="${requestScope.statusLoginMessage}"/>--%>
 
 <html>
 <head>
@@ -48,7 +48,7 @@
                                 <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
 
                                     <%--                                    @elvariable id="loginForm" type="org.courses.controller.LoginController"--%>
-                                    <form:form action="process-login-form" method="post"
+                                    <form:form action="processing-login" method="post"
                                                class="bg-white p-4" modelAttribute="loginForm">
                                         <div class="row mb-4">
                                             <div class="col-12"><h2><spring:message
@@ -57,15 +57,6 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12 form-group">
-
-                                                <label class="text-black font-weight-bold"
-                                                       for="name"><spring:message
-                                                        code="navigation.registerForm.name"/></label>
-                                                <form:input type="text" id="name" class="form-control" path="name"
-                                                            required="required"/>
-                                                <form:errors path="name" cssClass="text-danger"/>
-                                            </div>
 
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold" for="email">Email</label>

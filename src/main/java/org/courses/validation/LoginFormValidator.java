@@ -16,14 +16,11 @@ public class LoginFormValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         LoginForm loginForm = (LoginForm) target;
-        if (loginForm.getName() == null) {
-            errors.rejectValue("name", "error.cant.be.empty");
-        } else if (loginForm.getEmail() == null) {
+        if (loginForm.getEmail() == null) {
             errors.rejectValue("email", "error.cant.be.empty");
         } else if (loginForm.getPassword() == null) {
             errors.rejectValue("password", "error.cant.be.empty");
         }
-
     }
 
 }

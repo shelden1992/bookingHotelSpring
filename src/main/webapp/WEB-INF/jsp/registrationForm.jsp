@@ -43,7 +43,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
-                                    <form:form action="processing-registration-form" method="post"
+                                    <form:form action="processing-registration" method="post"
                                                class="bg-white p-4" modelAttribute="registrationForm">
                                         <div class="row mb-4">
                                             <div class="col-12"><h2><fmt:message
@@ -69,8 +69,9 @@
                                             </div>
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold" for="email">Email</label>
-                                                <input type="email" id="email" class="form-control " name="email"
-                                                       required="required">
+                                                <form:input type="email" id="email" class="form-control " path="email"
+                                                       required="required"/>
+                                                <form:errors path="email" cssClass="text-danger"/>
                                             </div>
 
                                             <div class="col-md-12 form-group">

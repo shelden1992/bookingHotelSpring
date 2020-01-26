@@ -16,40 +16,59 @@
             <span></span>
         </div>
 
+
         <div class="collapse navbar-collapse" id="templateux-navbar-nav">
             <ul class="navbar-nav ml-5">
-                <security:authorize access="!isAuthenticated()">
-                    <li class="nav-item"><a class="nav-link" href=${pageContext.request.contextPath}/admin>
-                        <spring:message
-                                code="navigation.banner.admin"/> </a></li>
-                </security:authorize>
-                <li class="nav-item"><a class="nav-link" href=${pageContext.request.contextPath}/> <spring:message
-                        code="navigation.banner.home"/> </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="${pageContext.request.contextPath}/selection-rooms"><spring:message
-                        code="navigation.banner.rooms"/></a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/event"><spring:message
-                        code="navigation.banner.events"/></a></li>
+                <security:authorize access="!hasRole('ROLE_ADMIN')">
 
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/team"><spring:message
-                        code="navigation.banner.team"/></a>
-                </li>
+                    <li class="nav-item"><a class="nav-link" href=${pageContext.request.contextPath}/> <spring:message
+                            code="navigation.banner.home"/> </a></li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="${pageContext.request.contextPath}/selection-rooms"><spring:message
+                            code="navigation.banner.rooms"/></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="${pageContext.request.contextPath}/event"><spring:message
+                            code="navigation.banner.events"/></a></li>
 
-                <li class="nav-item"><a class="nav-link"
-                                        href="${pageContext.request.contextPath}/#section-contact"><spring:message
-                        code="navigation.banner.contact"/></a>
-                </li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="gallery"><spring:message code="navigation.banner.gallery"/></a>
-                </li>
-                <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
-                    <a class="nav-link" href="#"
-                       data-toggle="modal"
-                       data-target="#booking-form">
+                    <li class="nav-item"><a class="nav-link"
+                                            href="${pageContext.request.contextPath}/team"><spring:message
+                            code="navigation.banner.team"/></a>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link"
+                                            href="${pageContext.request.contextPath}/#section-contact"><spring:message
+                            code="navigation.banner.contact"/></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="gallery"><spring:message code="navigation.banner.gallery"/></a>
+                    </li>
+                    <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
+                        <a class="nav-link" href="#"
+                           data-toggle="modal"
+                           data-target="#booking-form">
     <span class="pb_rounded-4 px-4 rounded"><spring:message
             code="navigation.bookingForm.booking"/></span></a>
-                </li>
+                    </li>
+                </security:authorize>
+                <security:authorize access="hasRole('ROLE_ADMIN')">
+                    <li class="nav-item"><a class="nav-link" href=${pageContext.request.contextPath}/> <spring:message
+                            code="navigation.banner.home"/> </a></li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="${pageContext.request.contextPath}/admin/all-users"><spring:message
+                            code="navigation.banner.allUsers"/></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="${pageContext.request.contextPath}/admin/free-rooms"><spring:message
+                            code="navigation.banner.freeRooms"/></a></li>
+
+                    <li class="nav-item"><a class="nav-link"
+                                            href="${pageContext.request.contextPath}/admin/message"><spring:message
+                            code="navigation.banner.message"/></a>
+                    </li>
+
+                </security:authorize>
+
 
                 <security:authorize access="!isAuthenticated()">
                     <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
@@ -60,10 +79,14 @@
                 </security:authorize>
 
                 <security:authorize access="isAuthenticated()">
+                    <li class="text-danger" style="align-self: center;"><security:authentication property="name"/></li>
+
                     <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
+
                         <a class="nav-link" href="${pageContext.request.contextPath}/logout">
-                            <span class="pb_rounded-4 px-3 rounded"><spring:message
-                                    code="navigation.registerForm.signOut"/></span></a>
+                            <span class="pb_rounded-4 px-3 rounded">
+                                <spring:message
+                                        code="navigation.registerForm.signOut"/></span></a>
                     </li>
                 </security:authorize>
 

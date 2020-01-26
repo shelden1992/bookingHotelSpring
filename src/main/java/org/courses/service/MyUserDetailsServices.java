@@ -17,16 +17,19 @@ import java.util.Set;
 public class MyUserDetailsServices implements UserDetailsService {
     private static final org.apache.log4j.Logger LOG = Logger.getLogger(MyUserDetailsServices.class);
     @Resource
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LOG.debug("Username " + username);
-        User userByEmail = userService.getUserByEmail(username);
-        LOG.debug("User by email " + userByEmail);
-        UserRole userRole = userByEmail.getUserRole();
+        User user = userServiceImpl.getUserByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        LOG.debug("User by email " + user);
+        UserRole userRole = user.getUserRole();
         Set<SimpleGrantedAuthority> userAuthority = getUserAuthority(userRole);
-        return buildUserForAuthentication(userByEmail, userAuthority);
+        return buildUserForAuthentication(user, userAuthority);
     }
 
     private UserDetails buildUserForAuthentication(User userByEmail, Set<SimpleGrantedAuthority> userAuthority) {

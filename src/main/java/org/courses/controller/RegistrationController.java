@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.courses.form.RegistrationForm;
 import org.courses.model.User;
 import org.courses.model.UserRole;
-import org.courses.service.UserService;
+import org.courses.service.UserServiceImpl;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
 public class RegistrationController {
     private static final Logger LOG = Logger.getLogger(RegistrationController.class);
     @Resource
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     @Resource(name = "registrationFormValidator")
     private Validator validator;
 
@@ -48,7 +48,7 @@ public class RegistrationController {
             LOG.debug("Error in registration form " + error.toString());
             return "registrationForm";
         }
-        User user = userService.registerUser(registrationForm, UserRole.USER);
+        User user = userServiceImpl.registerUser(registrationForm, UserRole.USER);
         if (user == null) {
             error.rejectValue("email", "error.email.exist");
             return "registrationForm";

@@ -3,14 +3,17 @@ package org.courses.controller;
 import org.apache.log4j.Logger;
 import org.courses.form.LoginForm;
 import org.courses.model.User;
-import org.courses.service.UserService;
+import org.courses.service.UserServiceImpl;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -19,7 +22,7 @@ import javax.validation.Valid;
 public class LoginController {
     private static final Logger LOG = Logger.getLogger(LoginController.class);
     @Resource
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     @Resource(name = "loginFormValidator")
     private Validator validator;
 
@@ -44,9 +47,9 @@ public class LoginController {
             return "loginForm";
         }
         LOG.debug("LoginForm " + loginForm);
-        User user = userService.getUserByEmail(loginForm.getEmail());
+        User user = userServiceImpl.getUserByEmail(loginForm.getEmail());
         if (user != null) {
-            if (userService.passwordSame(loginForm.getPassword(), user.getPassword())) {
+            if (userServiceImpl.passwordSame(loginForm.getPassword(), user.getPassword())) {
                 return "index";
             }
         }

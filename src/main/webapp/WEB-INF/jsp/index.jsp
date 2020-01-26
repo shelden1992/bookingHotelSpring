@@ -14,8 +14,8 @@
     <%@include file="head.jsp" %>
 </head>
 <body data-spy="scroll" data-target="#templateux-navbar" data-offset="200">
-
 <%@include file="navigationBar.jsp" %>
+
 <!-- END nav -->
 
 <section class="site-hero overlay" style="background-image: url(images/sea-view-1.jpg)"

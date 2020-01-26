@@ -26,6 +26,10 @@ public class Room extends BaseEntity {
             fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id")
     private List<Photo> photos;
+    @ManyToOne
+    @JoinTable(name = "room_reservation", joinColumns = {@JoinColumn(name = "room_id")},
+            inverseJoinColumns = @JoinColumn(name = "reservation_id"))
+    private Reservation reservation;
 
     public Room(int place, RoomType roomType) {
         this.place = place;

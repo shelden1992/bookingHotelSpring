@@ -1,9 +1,6 @@
 package org.courses.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
@@ -13,8 +10,10 @@ import java.util.StringJoiner;
 public class Reservation extends BaseEntity {
     @NotNull
     @NotEmpty
-    @OneToOne
-    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinTable(name = "room_reservation", joinColumns = {@JoinColumn(name = "reservation_id")},
+            inverseJoinColumns = @JoinColumn(name = "room_id"))
+//    @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
     @NotNull
     @NotEmpty

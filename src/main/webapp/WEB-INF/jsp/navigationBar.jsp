@@ -21,6 +21,7 @@
             <ul class="navbar-nav ml-5">
                 <security:authorize access="!hasRole('ROLE_ADMIN')">
 
+
                     <li class="nav-item"><a class="nav-link" href=${pageContext.request.contextPath}/> <spring:message
                             code="navigation.banner.home"/> </a></li>
                     <li class="nav-item"><a class="nav-link"

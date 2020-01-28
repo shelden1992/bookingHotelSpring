@@ -59,11 +59,11 @@ public class Form extends BaseEntity {
     }
 
 
-    public int getEntityId() {
+    public int getId() {
         return id;
     }
 
-    public void setEntityId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

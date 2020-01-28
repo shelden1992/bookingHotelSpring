@@ -45,11 +45,11 @@ public class Reservation extends BaseEntity {
         this.finishReservation = finishReservation;
     }
 
-    public int getEntityId() {
+    public int getId() {
         return id;
     }
 
-    public void setEntityId(int reservationId) {
+    public void setId(int reservationId) {
         this.id = reservationId;
     }
 

@@ -9,7 +9,7 @@ public abstract class BaseEntity {
     @Column(unique = true, nullable = false)
     protected int id;
 
-    public abstract int getEntityId();
+    public abstract int getId();
 
-    public abstract void setEntityId(int id);
+    public abstract void setId(int id);
 }

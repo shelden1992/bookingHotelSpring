@@ -20,7 +20,7 @@ public class Room extends BaseEntity {
     @NotNull
     @NotEmpty
     @Column(name = "type")
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private RoomType roomType;
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
@@ -43,6 +43,21 @@ public class Room extends BaseEntity {
         this.roomType = roomType;
     }
 
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
 
     public Room() {
     }
@@ -73,11 +88,11 @@ public class Room extends BaseEntity {
         this.roomType = roomType;
     }
 
-    public int getEntityId() {
+    public int getId() {
         return id;
     }
 
-    public void setEntityId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

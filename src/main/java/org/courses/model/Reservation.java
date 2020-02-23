@@ -80,7 +80,7 @@ public class Reservation extends BaseEntity {
     @Override
     public String toString() {
         return new StringJoiner(", ", Reservation.class.getSimpleName() + "[", "]")
-                .add("room=" + room)
+//                .add("room=" + room)
                 .add("startReservation=" + startReservation)
                 .add("finishReservation=" + finishReservation)
                 .add("id=" + id)

@@ -20,7 +20,7 @@
         </div>
         <c:forEach items="${freeRooms}" var="room" varStatus="loop">
             <div class="row">
-                <div class="col-1">
+                <div class="col-md-6">
                     <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up"
                          data-aos-delay="200">
 

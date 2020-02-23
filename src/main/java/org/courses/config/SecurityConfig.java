@@ -21,25 +21,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login-form")
-                .loginProcessingUrl("/processing-login")
-                .defaultSuccessUrl("/", false)
-                .usernameParameter("email")
-                .passwordParameter("password")
-                //.failureUrl("/login.html?error=true")
-                .and()
-                .logout().invalidateHttpSession(true)
-                .logoutUrl("/logout")
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/");
+//        http
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/admin/**","/actuator/**").hasRole("ADMIN")
+//
+//                .antMatchers("/**").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login-form")
+//                .loginProcessingUrl("/processing-login")
+//                .defaultSuccessUrl("/", false)
+//                .usernameParameter("email")
+//                .passwordParameter("password")
+//                //.failureUrl("/login.html?error=true")
+//                .and()
+//                .logout().invalidateHttpSession(true)
+//                .logoutUrl("/logout")
+//                .deleteCookies("JSESSIONID")
+//                .logoutSuccessUrl("/");
     }
 
     @Bean

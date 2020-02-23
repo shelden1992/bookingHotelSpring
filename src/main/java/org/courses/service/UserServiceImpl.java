@@ -5,6 +5,8 @@ import org.courses.dao.UserRepository;
 import org.courses.form.RegistrationForm;
 import org.courses.model.User;
 import org.courses.model.UserRole;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +53,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUsers() {
-        return userRepository.findUsersBy();
+        return userRepository.findAll();
+    }
+
+    @Override
+    public Page<User> getUsers(Pageable pageable) {
+        System.out.println("page " + pageable.getPageSize());
+
+        Page<User> content = userRepository.findAll(pageable);
+        System.out.println(content.getContent());
+        return content;
     }
 
     public boolean passwordSame(String rawPassword, String encodedPassword) {

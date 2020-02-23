@@ -8,6 +8,7 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class LoginController {
     public void initBinder(WebDataBinder dataBinder) {
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
-        dataBinder.setValidator(validator);
+//        dataBinder.setValidator(validator);
     }
 
 
@@ -42,6 +43,8 @@ public class LoginController {
 
     @PostMapping(value = "/processing-login")
     public String processLoginForm(@Valid @ModelAttribute("loginForm") LoginForm loginForm, BindingResult error, Model model) {
+        System.out.println("Field error " + error.getFieldError());
+        error.getAllErrors().stream().map(ObjectError::getObjectName).forEach(System.out::println);
         if (error.hasErrors()) {
             LOG.debug("Error in loginForm " + error);
             return "loginForm";

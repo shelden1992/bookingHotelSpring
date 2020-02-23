@@ -17,9 +17,9 @@ public class LoginFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         LoginForm loginForm = (LoginForm) target;
         if (loginForm.getEmail() == null) {
-            errors.rejectValue("email", "error.cant.be.empty");
+            errors.rejectValue("email", "Can't be empty");
         } else if (loginForm.getPassword() == null) {
-            errors.rejectValue("password", "error.cant.be.empty");
+            errors.rejectValue("password", "Can't be empty");
         }
     }
 

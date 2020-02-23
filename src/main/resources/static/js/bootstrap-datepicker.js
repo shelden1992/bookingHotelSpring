@@ -1669,3 +1669,30 @@
 	});
 
 }(window.jQuery));
+
+// $(document).ready(function() {
+// 	var date = new Date();
+// 	var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+// 	var end = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+//
+// 	$('#checkin_date').datepicker({
+// 		format: "mm/dd/yyyy",
+// 		todayHighlight: true,
+// 		startDate: today,
+// 		endDate: end,
+// 		autoclose: true
+// 	});
+// 	$('#checkout_date').datepicker({
+// 		format: "mm/dd/yyyy",
+// 		todayHighlight: true,
+// 		startDate: today,
+// 		endDate: end,
+// 		autoclose: true
+// 	});
+//
+// 	$('#checkin_date,#checkout_date').datepicker('setDate', today);
+// });
+// $('.datepicker').datepicker({
+// 	format: 'mm/dd/yyyy',
+// 	startDate: '-3d'
+// });

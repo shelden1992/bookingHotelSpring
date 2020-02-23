@@ -4,6 +4,10 @@ import org.courses.model.Room;
 import org.courses.model.User;
 import org.courses.service.RoomService;
 import org.courses.service.UserService;
+import org.courses.utils.PageWrapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,21 +27,24 @@ public class AdminController {
 
 
     @RequestMapping(value = "/all-users")
-    private String getAdminPage(Model model) {
-        List<User> users = userService.getUsers();
-        model.addAttribute("users", users);
-        return "showAllUsers";
+    private String getAdminPage(Model model, @PageableDefault(sort = {"id"}) Pageable pageable) {
+
+        Page<User> usersPage = userService.getUsers(pageable);
+        PageWrapper<User> pageWrapper = new PageWrapper<>(usersPage, "/admin/all-users", 10);
+        model.addAttribute("page", pageWrapper);
+        model.addAttribute("users", pageWrapper.getContent());
+        return "allUsers";
 
     }
 
     @RequestMapping(value = "/free-rooms")
+
     private String freeRooms(Model model) {
         Date dataStart = getDateToday();
         Date dataFinish = getDateTomorrow();
         List<Room> freeRooms = roomService.getFreeRooms(dataStart, dataFinish);
         model.addAttribute("freeRooms", freeRooms);
         return "freeRooms";
-
     }
 
     private Date getDateToday() {

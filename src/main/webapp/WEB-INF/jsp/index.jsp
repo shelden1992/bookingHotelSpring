@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--<%@taglib uri="http://www.springframework.org/tags" prefix="form"%>--%>
 
 <c:set var="form" value="${sessionScope.form}"/>
@@ -28,11 +29,7 @@
         <div class="row site-hero-inner justify-content-center align-items-center">
             <div class="col-md-10 text-center" data-aos="fade-up">
                 <h1 class="heading"><spring:message code="home.banner.header"/></h1>
-                <div class="col-md-12 text-center" data-aos="fade-up">
-                    <c:if test="${bookingStatus!=null}">--%>
-                        <h6 class="heading text-danger"><fmt:message key="${bookingStatus}"/></h6>
-                    </c:if>
-                </div>
+
             </div>
         </div>
     </div>
@@ -51,32 +48,38 @@
         <div class="row check-availabilty" id="next">
             <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
 
-                < form action="check-availabilty" method="post">
+                <form:form action="${pageContext.request.contextPath}/booking/show-rooms" modelAttribute="bookingForm" method="post">
                 <div class="row">
                     <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                        <label for="checkin_date" name="checkin_date"
-                               class="font-weight-bold text-black"><spring:message
-                                code="navigation.bookingForm.dataCheckIn"/> </label>
-                        <div class="field-icon-wrap">
-                            <div class="icon"><span class="icon-calendar"></span></div>
-                            <input type="text" id="checkin_date" path="checkinDate" class="form-control"/>
-                        </div>
+                        <label for="checkin_date" class="font-weight-bold text-black">
+                                <spring:message code="navigation.bookingForm.dataCheckIn"/>
+                            <div class="field-icon-wrap">
+                                <div class="icon"><span class="icon-calendar"></span></div>
+                                <form:input type="text" id="checkin_date" path="checkIn" class="form-control"/>
+                                <form:errors path="checkIn" cssClass="text-danger"/>
+                            </div>
+
                     </div>
                     <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                        <label for="checkout_date" class="font-weight-bold text-black"><spring:message
-                                code="navigation.bookingForm.dataCheckOut"/> </label>
+                        <label for="checkout_date" class="font-weight-bold text-black">
+                            <spring:message code="navigation.bookingForm.dataCheckOut"/> </label>
                         <div class="field-icon-wrap">
-                            <div class="icon"><span class="icon-calendar"></span></div>
-                            <input type="text" id="checkout_date" path="checkoutDate" class="form-control"/>
+                            <div class="icon">
+                                <span class="icon-calendar"/>
+                            </div>
+                            <form:input type="text" id="checkout_date" path="checkOut" class="form-control"/>
+                            <form:errors path="checkOut" cssClass="text-danger"/>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
                         <div class="row">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="adults" class="font-weight-bold text-black"><spring:message
-                                        code="navigation.bookingForm.adults"/></label>
+                                <label for="adults" class="font-weight-bold text-black">
+                                    <spring:message code="navigation.bookingForm.adults"/></label>
                                 <div class="field-icon-wrap">
-                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <div class="icon">
+                                        <span class="ion-ios-arrow-down"/>
+                                    </div>
                                     <form:select path="adults" id="adults" class="form-control">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -86,16 +89,18 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="roomType" class="font-weight-bold text-black"><spring:message
-                                        code="navigation.bookingForm.roomType"/></label>
+                                <label for="roomType" class="font-weight-bold text-black">
+                                    <spring:message code="navigation.bookingForm.roomType"/></label>
                                 <div class="field-icon-wrap" onclick="">
-                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <form:select path="roomType" id="roomType" class="form-control">
+                                    <div class="icon">
+                                        <span class="ion-ios-arrow-down"/>
+                                    </div>
+                                    <form:select path="type" id="roomType" class="form-control">
                                         <option value="ALL" name="ALL"><spring:message
                                                 code="selectionRooms.header.all"/></option>
                                         <option value="COMFORT"><spring:message
                                                 code="selectionRooms.header.roomTypeComfort"/></option>
-                                        <option value="FAMILY REST" name="FAMILY REST"><spring:message
+                                        <option value="FAMILY_REST" name="FAMILY_REST"><spring:message
                                                 code="selectionRooms.header.roomTypeFamilyRest"/></option>
                                         <option value="RELAX"><spring:message
                                                 code="selectionRooms.header.roomTypeRelax"/></option>
@@ -115,20 +120,18 @@
                                 key="navigation.bookingForm.checkAvailabilty"/></button>
                     </div>
                     <c:if test="${existFreeRooms!=null}">
-                        <a style="color: red;font-size: large;"> <fmt:message
-                                key="${existFreeRooms}"/></a>
+                        <a style="color: red;font-size: large;">
+                            <fmt:message key="${existFreeRooms}"/>
+                        </a>
                     </c:if>
                 </div>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>
 </section>
 
-<%--<!--describe hotel-->--%>
 <%@include file="about.jsp" %>
-<%--<!-- END .block-1 -->--%>
-
 
 <!--reviews-->
 <section class="section testimonial-section">
@@ -143,7 +146,7 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_1.jpg" alt="Image placeholder"
+                        <img src="${pageContext.request.contextPath}/images/person_1.jpg" alt="Image placeholder"
                              class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
@@ -155,7 +158,7 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_2.jpg" alt="Image placeholder"
+                        <img src="${pageContext.request.contextPath}/images/person_2.jpg" alt="Image placeholder"
                              class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
@@ -166,7 +169,7 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_10.png" alt="Image placeholder"
+                        <img src="${pageContext.request.contextPath}/images/person_10.png" alt="Image placeholder"
                              class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
@@ -179,7 +182,7 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_11.jpeg" alt="Image placeholder"
+                        <img src="${pageContext.request.contextPath}/images/person_11.jpeg" alt="Image placeholder"
                              class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
@@ -191,7 +194,7 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_12.jpg" alt="Image placeholder"
+                        <img src="${pageContext.request.contextPath}/images/person_12.jpg" alt="Image placeholder"
                              class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
@@ -202,7 +205,7 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_14.jpg" alt="Image placeholder"
+                        <img src="${pageContext.request.contextPath}/images/person_14.jpg" alt="Image placeholder"
                              class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
